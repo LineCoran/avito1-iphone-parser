@@ -21,7 +21,12 @@ const parsingProcess = async (ctx: Context) => {
 
   const skip = Object.keys(dataBaseBySku).length === 0;
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+        'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+      }
+    });
     await ctx.sendMessage(`Статус ${response.status} ${response.statusText}`);
     let html = response.data;
     const dom = new JSDOM(html);
@@ -106,10 +111,11 @@ const stopJob = () => async (ctx: Context) => {
   if (cronJob) {
     cronJob.stop()
     await ctx.sendMessage('Парсинг остановлен. Напишите команду /start чтобы возобновить процесс.');
-    cronJob = null
-    dataBaseBySku = {}
-    lastMsgId = null
   }
+
+  dataBaseBySku = {}
+  lastMsgId = null
+  cronJob = null
 };
 
 export { start, stopJob };
