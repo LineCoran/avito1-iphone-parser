@@ -198,11 +198,6 @@
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
-"@types/luxon@~3.4.0":
-  version "3.4.2"
-  resolved "https://registry.npmjs.org/@types/luxon/-/luxon-3.4.2.tgz"
-  integrity sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==
-
 "@types/ms@*":
   version "0.7.33"
   resolved "https://registry.npmjs.org/@types/ms/-/ms-0.7.33.tgz"
@@ -400,14 +395,6 @@ asynckit@^0.4.0:
   resolved "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-axios-socks5-agent@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.npmjs.org/axios-socks5-agent/-/axios-socks5-agent-1.0.5.tgz"
-  integrity sha512-n3GAyR38V2a35i3/ukVjYmCFXvOEAi7aOehztzgeWlAKQBhtrjIyfecXTvAg5uYImc0oWTdhqD+2YaZ5j4v+xw==
-  dependencies:
-    socks5-http-client "^1.0.4"
-    socks5-https-client "^1.2.1"
-
 axios@^1.7.9:
   version "1.7.9"
   resolved "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz"
@@ -528,14 +515,6 @@ create-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.npmjs.org/create-require/-/create-require-1.1.1.tgz"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
-
-cron@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.npmjs.org/cron/-/cron-3.5.0.tgz"
-  integrity sha512-0eYZqCnapmxYcV06uktql93wNWdlTmmBFP2iYz+JPVcQqlyFYcn1lFuIk4R54pkOmE7mcldTAPZv6X5XA4Q46A==
-  dependencies:
-    "@types/luxon" "~3.4.0"
-    luxon "~3.5.0"
 
 cross-spawn@^7.0.3:
   version "7.0.3"
@@ -866,15 +845,6 @@ inherits@^2.0.3, inherits@2:
   resolved "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-ip-address@~6.1.0:
-  version "6.1.0"
-  resolved "https://registry.npmjs.org/ip-address/-/ip-address-6.1.0.tgz"
-  integrity sha512-u9YYtb1p2fWSbzpKmZ/b3QXWA+diRYPxc2c4y5lFB/MMk5WZ7wNZv8S3CFcIGVJ5XtlaCAl/FQy/D3eQ2XtdOA==
-  dependencies:
-    jsbn "1.1.0"
-    lodash "^4.17.15"
-    sprintf-js "1.1.2"
-
 is-binary-path@~2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/is-binary-path/-/is-binary-path-2.1.0.tgz"
@@ -913,11 +883,6 @@ isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
-
-jsbn@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/jsbn/-/jsbn-1.1.0.tgz"
-  integrity sha512-4bYVV3aAMtDTTu4+xsDYa6sy9GyJ69/amsu9sYF2zqjiEoZA5xJi3BrfX3uY+/IekIu7MwdObdbDWpoZdBv3/A==
 
 jsdom@^26.0.0:
   version "26.0.0"
@@ -959,20 +924,10 @@ json-schema-traverse@^1.0.0:
   resolved "https://registry.npmjs.org/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz"
   integrity sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==
 
-lodash@^4.17.15:
-  version "4.17.21"
-  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
-
 lru-cache@^10.4.3:
   version "10.4.3"
   resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-10.4.3.tgz"
   integrity sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==
-
-luxon@~3.5.0:
-  version "3.5.0"
-  resolved "https://registry.npmjs.org/luxon/-/luxon-3.5.0.tgz"
-  integrity sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==
 
 make-dir@^3.1.0:
   version "3.1.0"
@@ -1333,32 +1288,6 @@ simple-update-notifier@^2.0.0:
   integrity sha512-a2B9Y0KlNXl9u/vsW6sTIu9vGEpfKu2wRV6l1H3XEas/0gUIzGzBoP/IouTcUQbm9JWZLH3COxyn03TYlFax6w==
   dependencies:
     semver "^7.5.3"
-
-socks5-client@~1.2.3, socks5-client@~1.2.6:
-  version "1.2.8"
-  resolved "https://registry.npmjs.org/socks5-client/-/socks5-client-1.2.8.tgz"
-  integrity sha512-js8WqQ/JjZS3IQwUxRwSThvXzcRIHE8sde8nE5q7nqxiFGb8EoHmNJ9SF2lXqn3ux6pUV3+InH7ng7mANK6XfA==
-  dependencies:
-    ip-address "~6.1.0"
-
-socks5-http-client@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/socks5-http-client/-/socks5-http-client-1.0.4.tgz"
-  integrity sha512-K16meYkltPtps6yDOqK9Mwlfz+pdD2kQQQ/TCO/gu2AImUmfO6nF2uXX1YWrPs4NCfClQNih19wqLXmuUcZCrA==
-  dependencies:
-    socks5-client "~1.2.6"
-
-socks5-https-client@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/socks5-https-client/-/socks5-https-client-1.2.1.tgz"
-  integrity sha512-FbZ/X/2Xq3DAMhuRA4bnN0jy1QxaPTVPLFvyv6CEj0QDKSTdWp9yRxo1JhqXmWKhPQeJyUMajHJB2UjT43pFcw==
-  dependencies:
-    socks5-client "~1.2.3"
-
-sprintf-js@1.1.2:
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.1.2.tgz"
-  integrity sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==
 
 string_decoder@^1.1.1:
   version "1.3.0"

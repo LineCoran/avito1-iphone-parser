@@ -2,9 +2,7 @@ import { Context } from 'telegraf';
 import createDebug from 'debug';
 import axios from 'axios';
 import { JSDOM } from 'jsdom';
-import { CronJob } from 'cron'
 const dayjs = require('dayjs');
-// import { SocksProxyAgent } from 'axios-socks5-agent';
 
 let dataBaseBySku: Partial<Record<string, { title: string, link: string, price: string }>> = {};
 
@@ -13,7 +11,7 @@ let dataBaseBySku: Partial<Record<string, { title: string, link: string, price: 
 //   port: 9050,             // Порт прокси
 // });
 
-let cronJob: CronJob | null = null;
+let interval: number | null = null;
 
 const dayjsFormat = 'YYYY-MM-DD HH:mm:ss'
 
@@ -33,14 +31,14 @@ const parsingProcess = async (ctx: Context) => {
         'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
       }
     });
-    await ctx.sendMessage(`Статус ${response.status} ${response.statusText}`);
+    // await ctx.sendMessage(`Статус ${response.status} ${response.statusText}`);
     let html = response.data;
     const dom = new JSDOM(html);
     const document = dom.window.document;
     const items = document.querySelectorAll('[data-marker=item]');
 
 
-    await ctx.sendMessage(`Нашли: ${items.length}`)
+    // await ctx.sendMessage(`Нашли: ${items.length}`)
 
     const newItems: string[] = []
 
@@ -103,25 +101,21 @@ const start = () => async (ctx: Context) => {
   debug('Triggered "greeting" text command');
   const userName = `${ctx.message?.from.first_name} ${ctx.message?.from.last_name}`;
   await ctx.sendMessage(`Привет, ${userName}.\nБот настроен на поиск новых объявлений 1 раз в 60 секунд по ссылке ${url} \nЧтобы остановить процесс - введи команду /stop`)
-
   await jobProcess(ctx)
 
-  cronJob = new CronJob('00,30 * * * * *', async () => {
+  //@ts-ignore
+  interval = setInterval(async () => {
     await jobProcess(ctx)
-  })
-  cronJob.start();
+  }, 30000);
 };
 
 const stopJob = () => async (ctx: Context) => {
 
-  if (cronJob) {
-    cronJob.stop()
+  if (interval) {
+    clearInterval(interval)
     await ctx.sendMessage('Парсинг остановлен. Напишите команду /start чтобы возобновить процесс.');
   }
-
-  dataBaseBySku = {}
-  lastMsgId = null
-  cronJob = null
+  interval = null
 };
 
 export { start, stopJob };
