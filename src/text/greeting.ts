@@ -3,9 +3,15 @@ import createDebug from 'debug';
 import axios from 'axios';
 import { JSDOM } from 'jsdom';
 import { CronJob } from 'cron'
-import * as dayjs from 'dayjs';
+const dayjs = require('dayjs');
+// import { SocksProxyAgent } from 'axios-socks5-agent';
 
 let dataBaseBySku: Partial<Record<string, { title: string, link: string, price: string }>> = {};
+
+// const agent = new SocksProxyAgent({
+//   hostname: 'proxy_host', // IP-адрес вашего прокси
+//   port: 9050,             // Порт прокси
+// });
 
 let cronJob: CronJob | null = null;
 
