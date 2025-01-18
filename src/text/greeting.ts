@@ -17,15 +17,19 @@ let lastMsgId: number | null = null;
 const url = 'https://www.avito.ru/sankt-peterburg/telefony/mobilnye_telefony/apple-ASgBAgICAkS0wA3OqzmwwQ2I_Dc?context=H4sIAAAAAAAA_0q0MrSqLraysFJKK8rPDUhMT1WyLrYys1LKzMvJzEtVsq4FBAAA__9-_ClVIgAAAA&geoCoords=59.939095%2C30.315868&presentationType=serp&s=104';
 const root = 'https://www.avito.ru'
 
-const parsingProcess = async () => {
+const parsingProcess = async (ctx: Context) => {
 
   const skip = Object.keys(dataBaseBySku).length === 0;
   try {
     const response = await axios.get(url);
+    await ctx.sendMessage(`Статус ${response.status} ${response.statusText}`);
     let html = response.data;
     const dom = new JSDOM(html);
     const document = dom.window.document;
     const items = document.querySelectorAll('[data-marker=item]');
+
+
+    await ctx.sendMessage(`Нашли: ${items.length}`)
 
     const newItems: string[] = []
 
@@ -51,7 +55,7 @@ const parsingProcess = async () => {
 const jobProcess = async (ctx: Context) => {
   try {
 
-    const newItemsIds = await parsingProcess()
+    const newItemsIds = await parsingProcess(ctx)
 
     if (!newItemsIds.length) {
       const infoMessage = `Новых товаров пока нет.\nПоследнее время проверки:\n${dayjs().format(dayjsFormat)}`
@@ -89,7 +93,9 @@ const start = () => async (ctx: Context) => {
   const userName = `${ctx.message?.from.first_name} ${ctx.message?.from.last_name}`;
   await ctx.sendMessage(`Привет, ${userName}.\nБот настроен на поиск новых объявлений 1 раз в 60 секунд по ссылке ${url} \nЧтобы остановить процесс - введи команду /stop`)
 
-  cronJob = new CronJob('00 * * * * *', async () => {
+  await jobProcess(ctx)
+
+  cronJob = new CronJob('00,30 * * * * *', async () => {
     await jobProcess(ctx)
   })
   cronJob.start();
