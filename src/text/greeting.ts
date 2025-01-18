@@ -87,7 +87,7 @@ const jobProcess = async (ctx: Context) => {
 const start = () => async (ctx: Context) => {
   debug('Triggered "greeting" text command');
   const userName = `${ctx.message?.from.first_name} ${ctx.message?.from.last_name}`;
-  await ctx.sendMessage(`Привет, ${userName}. Этот бот настроен на поиск новых объявлений по ссылке ${url}`)
+  await ctx.sendMessage(`Привет, ${userName}.\nБот настроен на поиск новых объявлений 1 раз в 60 секунд по ссылке ${url} \nЧтобы остановить процесс - введи команду /stop`)
 
   cronJob = new CronJob('00 * * * * *', async () => {
     await jobProcess(ctx)
