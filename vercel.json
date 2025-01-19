@@ -1,6 +1,12 @@
 {
   "version": 2,
   "public": true,
+  "crons": [
+    {
+      "path": "/api/cron-job.ts",
+      "schedule": "30 * * * *"
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
