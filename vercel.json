@@ -4,7 +4,7 @@
   "crons": [
     {
       "path": "/api/cron-job.ts",
-      "schedule": "30 * * * *"
+      "schedule": "* 00 * * *"
     }
   ],
   "rewrites": [
