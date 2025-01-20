@@ -1,17 +1,27 @@
+// ts-nocheck
+// @ts-nocheck
 import axios from 'axios';
 import { JSDOM } from 'jsdom';
 import { Context } from 'telegraf';
+import { Update } from 'telegraf/typings/core/types/typegram';
 const dayjs = require('dayjs');
 
 let lastMsgId: number | null = null;
 const root = 'https://www.avito.ru'
 const dayjsFormat = 'YYYY-MM-DD HH:mm:ss'
-let dataBaseBySku: Partial<Record<string, { title: string, link: string, price: string }>> = {};
+export let dataBaseBySku: Partial<Record<string, { title: string, link: string, price: string }>> = {};
 export const url = 'https://www.avito.ru/sankt-peterburg/telefony/mobilnye_telefony/apple-ASgBAgICAkS0wA3OqzmwwQ2I_Dc?context=H4sIAAAAAAAA_0q0MrSqLraysFJKK8rPDUhMT1WyLrYys1LKzMvJzEtVsq4FBAAA__9-_ClVIgAAAA&geoCoords=59.939095%2C30.315868&presentationType=serp&s=104';
+
+export const getChatId = (ctx: Context) => {
+  return ctx.update.message.chat.id;
+}
 
 const parsingProcess = async (ctx: Context) => {
 
-  const skip = Object.keys(dataBaseBySku).length === 0;
+  const chat_id = getChatId(ctx);
+
+  if (!dataBaseBySku[chat_id]) dataBaseBySku[chat_id] = {};
+  const skip = Object.keys(dataBaseBySku[chat_id]).length === 0;
   try {
     const response = await axios.get(url, {
       headers: {
@@ -25,6 +35,10 @@ const parsingProcess = async (ctx: Context) => {
     const document = dom.window.document;
     const items = document.querySelectorAll('[data-marker=item]');
 
+    // @ts-ignore
+
+
+
 
     // await ctx.sendMessage(`Нашли: ${items.length}`)
 
@@ -37,8 +51,8 @@ const parsingProcess = async (ctx: Context) => {
       const title = item.querySelector('h3')?.innerHTML || '';
       const price = item.querySelector('p[data-marker=item-price]')?.querySelector('meta[itemprop=price]')?.getAttribute('content') || '';
       const currency = item.querySelector('p[data-marker=item-price]')?.querySelector('meta[itemprop=priceCurrency]')?.getAttribute('content') || '';
-      if (id && !dataBaseBySku[id]) {
-        dataBaseBySku[id] = { link, title, price: `${Number(price).toLocaleString('ru-RU')} ${currency}` }
+      if (id && !dataBaseBySku[chat_id][id]) {
+        dataBaseBySku[chat_id][id] = { link, title, price: `${Number(price).toLocaleString('ru-RU')} ${currency}` }
         newItems.push(id);
       }
     })
@@ -65,10 +79,11 @@ export const jobProcess = async (ctx: Context) => {
       }
       return
     }
+    const chatId = getChatId(ctx);
     if (newItemsIds.length) {
       let msg = '<strong>Новые товары: </strong>\n'
       newItemsIds.forEach(id => {
-        const item = dataBaseBySku[id];
+        const item = dataBaseBySku[chatId][id];
         if (item) {
           const { title, link, price } = item
           const itemMsg = `<a href="${link}"><b>${title}</b></a> <b>- ${price}</b>\n`
